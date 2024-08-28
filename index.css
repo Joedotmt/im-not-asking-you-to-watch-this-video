@@ -161,14 +161,6 @@ section
     padding-bottom: 5em;
 }
 
-footer
-{
-    z-index: 3;
-    width: calc(100% - 2em);
-    padding: 1em;
-    backdrop-filter: hue-rotate(180deg);
-}
-
 .sec2
 {
     display: flex;
