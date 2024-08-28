@@ -135,9 +135,21 @@ body
     backdrop-filter: blur(12vmax);
 }
 
+section
+{
+    flex-shrink: 0;
+    padding: 2em;
+    background-color: rgb(0, 0, 0);
+    width: calc(100% - 4em);
+    height: 400px;
+    color: white;
+    margin-top: 2em;
+    border: 2px solid #ffffff24;
+}
 
 .button-29
 {
+    flex-shrink: 0;
     align-items: center;
     appearance: none;
     background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);

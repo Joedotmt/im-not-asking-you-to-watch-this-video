@@ -36,7 +36,10 @@ function init()
 }
 init();
 
-
+eye1dx = 0;
+eye1dy = 0;
+eye2dy = 0;
+eye2dx = 0;
 function animate()
 {
     blob.animate({
@@ -58,23 +61,24 @@ function animate()
     const eye2OriginY = lerp(bbox.top, bbox.bottom, 0.75);
 
     // Calculate direction vector for eye1
-    let eye1dx = mouseX - eye1OriginX;
-    let eye1dy = mouseY - eye1OriginY;
+    eye1dx = lerp(eye1dx, mouseX - eye1OriginX, 0.1);
+    eye1dy = lerp(eye1dy, mouseY - eye1OriginY, 0.1);
 
     // Calculate direction vector for eye2
-    let eye2dx = mouseX - eye2OriginX;
-    let eye2dy = mouseY - eye2OriginY;
+    eye2dx = lerp(eye2dx, mouseX - eye2OriginX, 0.1);
+    eye2dy = lerp(eye2dy, mouseY - eye2OriginY, 0.1);
 
     // Limit eye movement to within 50px
     const maxDistance = eye_width * 0.7;
     let eye1Target = extendPoint(eye1OriginX, eye1OriginY, eye1dx, eye1dy, Math.min(maxDistance, Math.sqrt(eye1dx * eye1dx + eye1dy * eye1dy)));
     let eye2Target = extendPoint(eye2OriginX, eye2OriginY, eye2dx, eye2dy, Math.min(maxDistance, Math.sqrt(eye2dx * eye2dx + eye2dy * eye2dy)));
 
-    eye1.style.left = `${lerp(parseFloat(eye1.style.left) || 0, eye1Target.newX - eye_width / 2, 0.1)}px`;
-    eye1.style.top = `${lerp(parseFloat(eye1.style.top) || 0, eye1Target.newY - eye_height / 2, 0.1)}px`;
 
-    eye2.style.left = `${lerp(parseFloat(eye2.style.left) || 0, eye2Target.newX - eye_width / 2, 0.1)}px`;
-    eye2.style.top = `${lerp(parseFloat(eye2.style.top) || 0, eye2Target.newY - eye_height / 2, 0.1)}px`;
+    eye1.style.left = `${eye1Target.newX - eye_width / 2}px`;
+    eye1.style.top = `${eye1Target.newY - eye_height / 2}px`;
+
+    eye2.style.left = `${eye2Target.newX - eye_width / 2}px`;
+    eye2.style.top = `${eye2Target.newY - eye_height / 2}px`;
 
 
     // Set eye sizes
