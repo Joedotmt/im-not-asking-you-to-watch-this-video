@@ -1,0 +1,153 @@
+body
+{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #000000;
+    height: 100vh;
+    margin: 0rem;
+    color: white;
+    overflow-x: hidden;
+    align-items: center;
+}
+
+.joemtlogo
+{
+    transition: 0.1s ease;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    height: 50px;
+}
+
+.header1
+{
+    height: 70px;
+    flex-shrink: 0;
+    width: 100%;
+    background-color: rgb(26, 26, 26);
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 22px;
+}
+
+.joemtlogo:hover
+{
+    scale: 1.1;
+}
+
+.joemtlogo:active
+{
+    scale: 0.9;
+}
+
+.logo-img
+{
+    height: 50vh;
+}
+
+.logo-eye
+{
+    position: fixed;
+    transform-origin: center;
+    left: 0;
+    top: 0;
+}
+
+.logo-div
+{
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes rotate
+{
+    from
+    {
+        rotate: 0deg;
+    }
+
+    50%
+    {
+        scale: 1 1.5;
+    }
+
+    to
+    {
+        rotate: 360deg;
+    }
+}
+
+#blob
+{
+    background-color: white;
+    height: 34vmax;
+    aspect-ratio: 1;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: linear-gradient(to right, aquamarine, mediumpurple);
+    animation: rotate 20s infinite;
+    opacity: 0.4;
+    z-index: -2;
+    user-select: none;
+    pointer-events: none;
+}
+
+#blur
+{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: -1;
+    backdrop-filter: blur(12vmax);
+}
+
+
+.button-29
+{
+    align-items: center;
+    appearance: none;
+    background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+    border: 0;
+    border-radius: 6px;
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono", monospace;
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s, transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+    font-size: 18px;
+}
+
+.button-29:hover
+{
+    box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
+.button-29:active
+{
+    box-shadow: #3c4fe0 0 3px 7px inset;
+    transform: translateY(2px);
+}
