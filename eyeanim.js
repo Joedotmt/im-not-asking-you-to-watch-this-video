@@ -1,19 +1,50 @@
-eye1 = document.getElementById("eye1");
-eye2 = document.getElementById("eye2");
-logo = document.getElementById("logo_img");
+/*document.addEventListener("touchstart", touchHandler, true);
+document.addEventListener("touchmove", touchHandler, true);
+document.addEventListener("touchend", touchHandler, true);
+document.addEventListener("touchcancel", touchHandler, true);
+*/
+const eye1 = document.getElementById("eye1");
+const eye2 = document.getElementById("eye2");
+const logo = document.getElementById("logo_img");
+const blob = document.getElementById("blob");
+let mouseX;
+let mouseY;
 
-let mouseX = 0;
-let mouseY = 0;
-
-// Update the mouse position on mouse move
-document.addEventListener("mousemove", function (event)
+function init()
 {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
-});
+    let bbox = logo.getBoundingClientRect();
+    mouseX = bbox.right;
+    mouseY = bbox.bottom;
+
+
+    // Update the mouse position on mouse move
+    document.addEventListener("mousemove", function (event)
+    {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    });
+    document.addEventListener("touchmove", function (event)
+    {
+        mouseX = event.changedTouches[0].clientX;
+        mouseY = event.changedTouches[0].clientY;
+    });
+    document.addEventListener("touchstart", function (event)
+    {
+        mouseX = event.changedTouches[0].clientX;
+        mouseY = event.changedTouches[0].clientY;
+    });
+}
+init();
+
 
 function animate()
 {
+    blob.animate({
+        left: `${mouseX}px`,
+        top: `${mouseY}px`
+    }, { duration: 3000, fill: "forwards" });
+
+
     let bbox = logo.getBoundingClientRect();
 
     // Estimate eye sizes
@@ -35,7 +66,7 @@ function animate()
     let eye2dy = mouseY - eye2OriginY;
 
     // Limit eye movement to within 50px
-    const maxDistance = 6;
+    const maxDistance = eye_width * 0.7;
     let eye1Target = extendPoint(eye1OriginX, eye1OriginY, eye1dx, eye1dy, Math.min(maxDistance, Math.sqrt(eye1dx * eye1dx + eye1dy * eye1dy)));
     let eye2Target = extendPoint(eye2OriginX, eye2OriginY, eye2dx, eye2dy, Math.min(maxDistance, Math.sqrt(eye2dx * eye2dx + eye2dy * eye2dy)));
 
@@ -58,17 +89,7 @@ function animate()
 requestAnimationFrame(animate);
 
 
-const blob = document.getElementById("blob");
 
-window.onpointermove = event =>
-{
-    const { clientX, clientY } = event;
-
-    blob.animate({
-        left: `${clientX}px`,
-        top: `${clientY}px`
-    }, { duration: 3000, fill: "forwards" });
-};
 
 // Helper math functions
 function lerp(a, b, amount)

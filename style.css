@@ -2,7 +2,7 @@ body
 {
     display: flex;
     flex-direction: column;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Secular One', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: #000000;
     height: 100vh;
     margin: 0rem;
@@ -30,7 +30,6 @@ body
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding-right: 22px;
 }
 
 .joemtlogo:hover
@@ -45,7 +44,7 @@ body
 
 .logo-img
 {
-    height: 50vh;
+    height: min(50vh, 36vw, 300px);
 }
 
 .logo-eye
@@ -61,6 +60,35 @@ body
     display: flex;
     justify-content: center;
 }
+
+.header1>button::after
+{
+    content: "Create a video link";
+}
+
+.header1>button
+{
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 350px)
+{
+    .header1>button::after
+    {
+        content: "Create video link";
+        font-size: 5.1vw;
+    }
+}
+
+@media only screen and (max-width: 300px)
+{
+    .header1>button::after
+    {
+        content: "Create link";
+        font-size: 5.1vw;
+    }
+}
+
 
 @keyframes rotate
 {
