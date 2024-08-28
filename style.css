@@ -20,17 +20,7 @@ body
     height: 50px;
 }
 
-.header1
-{
-    height: 70px;
-    flex-shrink: 0;
-    width: 100%;
-    background-color: rgb(26, 26, 26);
-    margin-bottom: 30px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
+
 
 .joemtlogo:hover
 {
@@ -59,6 +49,20 @@ body
 {
     display: flex;
     justify-content: center;
+}
+
+.header1
+{
+    background-color: rgba(0, 0, 0, 0.245);
+    height: 70px;
+    flex-shrink: 0;
+    width: 100%;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    backdrop-filter: hue-rotate(180deg);
+    border-bottom: 2px solid #ffffff24;
 }
 
 .header1>button::after
