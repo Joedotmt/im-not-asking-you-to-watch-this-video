@@ -36,12 +36,16 @@ init();
 
 let dx1 = dy1 = dx2 = dy2 = 0;
 
+let blobbbox = blob.getBoundingClientRect();
 function animate()
 {
+
+    let bodybbox = document.body.getBoundingClientRect();
+
     blob.animate({
-        left: `${mouseX}px`,
-        top: `${mouseY}px`
+        translate: `${mouseX - bodybbox.width / 2 - blobbbox.width / 2}px ${mouseY - bodybbox.height / 2 - blobbbox.height / 2}px`
     }, { duration: 3000, fill: "forwards" });
+
 
     const bbox = logo.getBoundingClientRect();
 
