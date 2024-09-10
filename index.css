@@ -19,12 +19,6 @@
     scale: 0.9;
 }
 
-.logo-img
-{
-    aspect-ratio: calc(2649/1051);
-    height: min(50vh, 36vw, 300px);
-}
-
 .logo-eye
 {
     display: none;

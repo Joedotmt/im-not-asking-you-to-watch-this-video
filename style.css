@@ -9,6 +9,7 @@ body
     color: white;
     overflow-x: hidden;
     align-items: center;
+    flex-shrink: 0;
 }
 
 a
@@ -28,6 +29,12 @@ a
     background-position: 100% 100%, 0 100%;
     background-repeat: no-repeat;
     transition: background-size 400ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.logo-img
+{
+    aspect-ratio: calc(2649/1051);
+    height: min(50vh, 36vw, 300px);
 }
 
 a:hover
