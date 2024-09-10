@@ -1,0 +1,82 @@
+body
+{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Secular One', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #000000;
+    height: 100vh;
+    margin: 0rem;
+    color: white;
+    overflow-x: hidden;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+a
+{
+    width: fit-content;
+    color: inherit;
+    text-decoration: none;
+    background:
+        linear-gradient(to right,
+            rgb(255, 255, 255),
+            rgb(232, 232, 232)),
+        linear-gradient(to right,
+            rgb(0, 220, 165),
+            rgb(0, 157, 255),
+            rgba(0, 100, 200, 1));
+    background-size: 100% 2px, 0 2px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 400ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.logo-img
+{
+    aspect-ratio: calc(2649/1051);
+    height: min(50vh, 36vw, 300px);
+}
+
+a:hover
+{
+    background-size: 0 2px, 100% 2px;
+}
+
+footer>div
+{
+    margin-left: 10px;
+    font-size: 1.5em;
+}
+
+footer>div>span
+{
+    border-radius: 0.1em;
+    padding: 0em 0.5em;
+    background-color: rgb(0, 92, 162);
+}
+
+footer>div~div
+{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    opacity: 0.7;
+    margin-left: 10px;
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+footer>div~div>div
+{
+    font-size: larger;
+}
+
+
+footer
+{
+    z-index: 3;
+    height: 100%;
+    width: calc(100% - 2em);
+    padding: 1em;
+    backdrop-filter: hue-rotate(180deg);
+}
