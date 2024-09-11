@@ -3,6 +3,7 @@
 
     import joeMTlogo from "$lib/joemtlogo.webp";
     import logoNoEyes from "$lib/logo no eyes.png";
+    import logoEyes from "$lib/logo.png";
     import eye1img from "$lib/Eye 1.png";
     import eye2img from "$lib/Eye 2.png";
     import preview from "$lib/preview.png";
@@ -13,19 +14,23 @@
     let blob;
 
     let mouseX, mouseY;
-    let dx1 = 0;
-    let dy1 = 0;
-    let dx2 = 0;
-    let dy2 = 0;
 
-    let blobbbox;
+    let mouseHasMoved = false;
+
+    let dx1 = 4;
+    let dy1 = -1;
+    let dx2 = -6;
+    let dy2 = -3;
+
+    let blobX = 50; // Starting at center (50%).
+    let blobY = 50; // Starting at center (50%).
+    let lerpFactor = 0;
 
     onMount(() => {
         eye1 = document.getElementById("eye1");
         eye2 = document.getElementById("eye2");
         logo = document.getElementById("logo_img");
         blob = document.getElementById("blob");
-        blobbbox = blob.getBoundingClientRect();
         init();
     });
 
@@ -33,37 +38,42 @@
         eye1.style.display = "block";
         eye2.style.display = "block";
 
-        const bbox = logo.getBoundingClientRect();
-        mouseX = bbox.right;
-        mouseY = bbox.bottom;
+        logo.src = logoNoEyes;
 
-        // Update the mouse position on mouse move
-        document.addEventListener("mousemove", updateMousePosition);
-        document.addEventListener("touchmove", updateTouchPosition);
-        document.addEventListener("touchstart", updateTouchPosition);
+        const bbox = document.body.getBoundingClientRect();
+        mouseX = bbox.width / 2;
+        mouseY = bbox.height / 2;
 
         requestAnimationFrame(animate);
     }
 
     function updateMousePosition(event) {
+        mouseHasMoved = true;
         mouseX = event.clientX;
         mouseY = event.clientY;
     }
 
     function updateTouchPosition(event) {
+        mouseHasMoved = true;
         mouseX = event.changedTouches[0].clientX;
         mouseY = event.changedTouches[0].clientY;
     }
 
-    function animate() {
-        let bodybbox = document.body.getBoundingClientRect();
+    function updateBlobPosition() {
+        const targetX = (mouseX / window.innerWidth) * 100;
+        const targetY = (mouseY / window.innerHeight) * 100;
 
-        blob.animate(
-            {
-                translate: `${mouseX - bodybbox.width / 2 - blobbbox.width / 2}px ${mouseY - bodybbox.height / 2 - blobbbox.height / 2}px`,
-            },
-            { duration: 3000, fill: "forwards" },
-        );
+        blobX = lerp(blobX, targetX, lerpFactor);
+        blobY = lerp(blobY, targetY, lerpFactor);
+
+        blob.style.left = `${blobX}%`;
+        blob.style.top = `${blobY}%`;
+    }
+
+    function animate() {
+        if (mouseHasMoved) {
+            lerpFactor = lerp(lerpFactor, 0.1, 0.01);
+        }
 
         const bbox = logo.getBoundingClientRect();
 
@@ -100,10 +110,12 @@
             Math.min(maxDistance, Math.hypot(eye2dx, eye2dy)),
         );
 
-        dx1 = lerp(dx1, eye1Target.newX - eye1OriginX, 0.1);
-        dy1 = lerp(dy1, eye1Target.newY - eye1OriginY, 0.1);
-        dx2 = lerp(dx2, eye2Target.newX - eye2OriginX, 0.1);
-        dy2 = lerp(dy2, eye2Target.newY - eye2OriginY, 0.1);
+        if (mouseHasMoved) {
+            dx1 = lerp(dx1, eye1Target.newX - eye1OriginX, lerpFactor);
+            dy1 = lerp(dy1, eye1Target.newY - eye1OriginY, lerpFactor);
+            dx2 = lerp(dx2, eye2Target.newX - eye2OriginX, lerpFactor);
+            dy2 = lerp(dy2, eye2Target.newY - eye2OriginY, lerpFactor);
+        }
 
         eye1.style.left = `${eye1OriginX - eye_width / 2 + dx1}px`;
         eye1.style.top = `${eye1OriginY - eye_height / 2 + dy1}px`;
@@ -115,6 +127,9 @@
         eye1.style.height = `${eye_height}px`;
         eye2.style.width = `${eye_width}px`;
         eye2.style.height = `${eye_height}px`;
+
+        // Update blob position within the animation loop
+        updateBlobPosition();
 
         requestAnimationFrame(animate);
     }
@@ -134,6 +149,12 @@
         };
     }
 </script>
+
+<svelte:window
+    on:mousemove={updateMousePosition}
+    on:touchmove={updateTouchPosition}
+    on:touchstart={updateTouchPosition}
+/>
 
 <svelte:head>
     <meta charset="UTF-8" />
@@ -161,7 +182,7 @@
         alt="main logo of website"
         id="logo_img"
         class="logo-img"
-        src={logoNoEyes}
+        src={logoEyes}
     />
     <img alt="" id="eye1" class="logo-eye" src={eye1img} />
     <img alt="" id="eye2" class="logo-eye" src={eye2img} />

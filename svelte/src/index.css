@@ -26,6 +26,7 @@
     transform-origin: center;
     left: 0;
     top: 0;
+    transform: scaleY(1.25);
     pointer-events: none;
     user-select: none;
 }
